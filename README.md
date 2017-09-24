@@ -95,9 +95,9 @@ If you use this code for your publications, please cite it as:
 
     @ONLINE{vdtc,
         author = "Ahmet Özlü",
-        title  = "Face Recognition Database Creator",
+        title  = "Face Database Creator",
         year   = "2017",
-        url    = "https://github.com/ahmetozlu/face_recognition_database_creator"
+        url    = "https://github.com/ahmetozlu/face_database_creator"
     }
 
 ## AUTHOR
