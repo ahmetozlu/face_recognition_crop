@@ -17,7 +17,7 @@
   <img src="https://user-images.githubusercontent.com/22610163/30775206-0d959a3c-a098-11e7-965e-add626987376.gif">
 </p>
 
-## Theory
+## THEORY
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/22610163/30774902-978f4d56-a092-11e7-9860-536fdfb990f1.png">
