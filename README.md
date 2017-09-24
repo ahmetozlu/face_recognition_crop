@@ -1,5 +1,18 @@
 # Single-View Face Recognition Database Creator
 
+<details>
+           <summary>Faces are Tracking, Cropping and Saving as Images from Video</summary>         
+</details>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/22610163/30784383-d75e112c-a15c-11e7-88e9-ec9ded45f57b.gif">
+</p>
+
+
+<details>
+           <summary>Images are Saving from Video With Appropriate Path Hierarchy</summary>         
+</details>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/22610163/30775206-0d959a3c-a098-11e7-965e-add626987376.gif">
 </p>
