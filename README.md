@@ -1,4 +1,4 @@
-# Single-View Face Recognition Database Creator
+# Multi-View Face Recognition Database Creator
 
 For technical details check the realted [medium post](https://medium.com/@ahmetozlu93/creating-multi-view-face-recognition-detection-database-for-deep-learning-in-programmatic-way-14bbdd4b00a9).
 
