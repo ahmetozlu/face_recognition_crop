@@ -84,6 +84,12 @@ These packages can be installed via pip :
 Years ago, we had to compile dlib manually from source (similar to how we install OpenCV). However, we can now use pip  to install dlib as well:
 
     $ pip install dlib
+    
+**3.) face_recognition 1.2.1**
+
+In this project, [Adam Geitgey](https://github.com/ageitgey/face_recognition)'s face recognition system (*thanks a lot to Adam*) was used for face recognition and it can be installed by pypi using pip3 (or pip2 for Python 2):
+    
+    pip3 install face_recognition
 
 ## USAGE
 
@@ -96,11 +102,11 @@ The default file paths are specified already, change them with yours. (edit the 
 ## CITATION
 If you use this code for your publications, please cite it as:
 
-    @ONLINE{vdtc,
+    @ONLINE{frc,
         author = "Ahmet Özlü",
         title  = "Face Database Creator",
         year   = "2017",
-        url    = "https://github.com/ahmetozlu/face_database_creator"
+        url    = "https://github.com/ahmetozlu/face_recognition_crop"
     }
 
 ## AUTHOR
