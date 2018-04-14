@@ -1,20 +1,26 @@
 import face_recognition as frec
 import cv2
 import os, argparse, sys
-import create_csv
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", type=str, help="Path to the video file")
 parser.add_argument("-p", "--people", type=str, nargs='+', help="Set of people as image file path and name pairs")
+parser.add_argument("-f", "--frame_step", default=1, type=int,  help="Frame step to look for faces")
+
 args = vars(parser.parse_args())
 VIDEO_PATH = args["input"]
 PEOPLE = args["people"]
+FRAME_STEP = args["frame_step"]
 
-# Open the input movie file
+## Open the input movie file
 input_movie = cv2.VideoCapture(VIDEO_PATH)
 length = int(input_movie.get(cv2.CAP_PROP_FRAME_COUNT))
 
-# Load some sample pictures and learn how to recognize them.
+## Create face_db directory
+if not os.path.exists("face_db/"):
+	os.mkdir("face_db/")
+
+## Load some sample pictures and learn how to recognize them.
 known_faces = []
 known_names = []
 for person in PEOPLE:
@@ -28,7 +34,7 @@ for person in PEOPLE:
 	if not os.path.exists("face_db/" + name):
 		os.mkdir("face_db/" + name)
 
-# Initialize some variables
+## Initialize some variables
 face_locations = []
 face_encodings = []
 face_names = []
@@ -36,15 +42,20 @@ frame_number = 0
 current_path = os.getcwd()
 
 while True:
-	# Grab a single frame of video
+
+	## Grab a single frame of video
 	ret, frame = input_movie.read()
 	frame_number += 1
 
-	# Quit when the input video file ends
+	## Pass as the frame step count
+	if frame_number % FRAME_STEP != 0:
+		continue
+
+	## Quit when the input video file ends
 	if not ret:
 		break
 
-	# Find all the faces and face encodings in the current frame of video
+	## Find all the faces and face encodings in the current frame of video
 	face_locations = frec.face_locations(frame)
 	face_encodings = frec.face_encodings(frame, face_locations)
 
@@ -84,10 +95,8 @@ while True:
 	if key == 27:
 		break
 
-# All done!
 input_movie.release()
 cv2.destroyAllWindows()
 
 ## TODO Better csv format should be considered
 #create_csv.CreateCsv(current_path + "/face_database/")
-
