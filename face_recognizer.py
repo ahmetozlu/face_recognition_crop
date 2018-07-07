@@ -93,10 +93,10 @@ while True:
     output_movie.write(frame)
     print("Writing frame {} / {}".format(frame_number, length))
     
-    #cv2.imshow('face_recog_crop', frame) # uncomment to get real-time output
+    cv2.imshow('face_recog_crop', frame)
     # Hit 'q' on the keyboard to quit!
-    #if cv2.waitKey(1) & 0xFF == ord('q'): # uncomment to get real-time output
-        #break # uncomment to get real-time output
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 # All done!
 input_movie.release()
