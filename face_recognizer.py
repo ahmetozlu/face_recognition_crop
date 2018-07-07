@@ -7,7 +7,11 @@
 import face_recognition
 import cv2
 import os
-import create_csv
+from utils import create_csv
+
+# The output video
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+output_movie = cv2.VideoWriter('tbbt_output.avi', fourcc, 30, (1280, 720))
 
 # Open the input movie file
 input_movie = cv2.VideoCapture("tbbt.mp4")
@@ -72,18 +76,30 @@ while True:
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
-	crop_img = frame[top:bottom, left:right]
-	if(name == "Sheldon Cooper"):
-	    cv2.imwrite(current_path + "/face_database/Sheldon/" + "sheldon"+str(counter)+".png",crop_img)
-	    counter = counter + 1
-	elif(name == "Penny"):
-	    cv2.imwrite(current_path + "/face_database/Penny/" + "penny"+str(counter1)+".png",crop_img)
-	    counter1 = counter1 + 1
+        crop_img = frame[top:bottom, left:right]
+        if(name == "Sheldon Cooper"):
+            cv2.imwrite(current_path + "/face_database/Sheldon/" + "sheldon"+str(counter)+".png",crop_img)
+            counter = counter + 1
+        elif(name == "Penny"):
+            cv2.imwrite(current_path + "/face_database/Penny/" + "penny"+str(counter1)+".png",crop_img)
+            counter1 = counter1 + 1
+
+        # Draw a label with a name below the face
+        cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+        font = cv2.FONT_HERSHEY_DUPLEX
+        cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
     # Write the resulting image to the output video file
+    output_movie.write(frame)
     print("Writing frame {} / {}".format(frame_number, length))
+    
+    #cv2.imshow('face_recog_crop', frame) # uncomment to get real-time output
+    # Hit 'q' on the keyboard to quit!
+    #if cv2.waitKey(1) & 0xFF == ord('q'): # uncomment to get real-time output
+        #break # uncomment to get real-time output
 
 # All done!
 input_movie.release()
 cv2.destroyAllWindows()
 create_csv.CreateCsv(current_path + "/face_database/")
+
