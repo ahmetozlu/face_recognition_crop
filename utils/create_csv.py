@@ -19,7 +19,7 @@ import csv
 #  |   |-- 1.pgm
 #  |   |-- ...
 #  |   |-- 10.pgm
-#  ...
+#  
 #  |-- s40
 #  |   |-- 1.pgm
 #  |   |-- ...
@@ -27,19 +27,19 @@ import csv
 #
 
 def CreateCsv(csvLine):  
-    
+
     BASE_PATH=csvLine
     SEPARATOR=","
 
     label = 0
     with open("face_dataset.csv", "w") as file:
-	    writer = csv.writer(file)
-	    for dirname, dirnames, filenames in os.walk(BASE_PATH):
-		for subdirname in dirnames:
-		    subject_path = os.path.join(dirname, subdirname)
-		    for filename in os.listdir(subject_path):
-		        abs_path = "%s/%s" % (subject_path, filename)
-		        csv_line = "%s%s%d" % (abs_path, SEPARATOR, label)
-			print csv_line			    		
-	    		writer.writerows([csv_line.split(',')])
-		    label = label + 1
+        writer = csv.writer(file)
+        for dirname, dirnames, filenames in os.walk(BASE_PATH):
+            for subdirname in dirnames:
+                subject_path = os.path.join(dirname, subdirname)
+                for filename in os.listdir(subject_path):
+                    abs_path = "%s/%s" % (subject_path, filename)
+                    name_age_gender_number_fer = filename.split(".")[0].split("_")
+                    csv_line = "%s%s%d%s%s%s%s%s%s%s%s%s%s" % (abs_path, SEPARATOR, label, SEPARATOR, name_age_gender_number_fer[0], SEPARATOR, name_age_gender_number_fer[1], SEPARATOR, name_age_gender_number_fer[2], SEPARATOR, name_age_gender_number_fer[3], SEPARATOR, name_age_gender_number_fer[5])		    		
+                    writer.writerows([csv_line.split(',')])
+                label = label + 1

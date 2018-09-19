@@ -9,6 +9,8 @@ import cv2
 import os
 from utils import create_csv
 
+import standalone_DetectEmotion
+
 # The output video
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 output_movie = cv2.VideoWriter('tbbt_output.avi', fourcc, 30, (1280, 720))
@@ -39,7 +41,10 @@ current_path = os.getcwd()
 
 counter = 0
 counter1 = 0
-
+targeted_fer_image = "NAN"
+fer = "NAN"
+label = "NAN"
+dataset_path = "NAN"
 while True:
     # Grab a single frame of video
     ret, frame = input_movie.read()
@@ -62,9 +67,9 @@ while True:
         # but I kept it simple for the demo
         name = None
         if match[0]:
-            name = "Sheldon Cooper"
+            name = "Jim Parsons, 28, M"
         elif match[1]:
-            name = "Penny"
+            name = "Kaley Cuoco, 29, F"
 
         face_names.append(name)
 
@@ -73,27 +78,39 @@ while True:
         if not name:
             continue
 
+        crop_img = frame[top-100:bottom+100, left-100:right+100]
+
+        if(name == "Jim Parsons, 28, M"):
+            cv2.imwrite(current_path + "/face_database/Sheldon/" + "jim_parsons"+str(counter)+".png",crop_img)
+            targeted_fer_image = current_path + "/face_database/Sheldon/" + "jim_parsons"+str(counter)+".png"
+            counter = counter + 1
+            label = "jim_parsons_28_m" + "_" + str(counter)
+            dataset_path = current_path + "/face_database/Sheldon/"
+        elif(name == "Kaley Cuoco, 29, F"):
+            cv2.imwrite(current_path + "/face_database/Penny/" + "kaley_cuoco"+str(counter1)+".png",crop_img)
+            targeted_fer_image = current_path + "/face_database/Penny/" + "kaley_cuoco"+str(counter1)+".png"
+            counter1 = counter1 + 1
+            label = "kaley_cuoco_29_f" + "_" + str(counter1)
+            dataset_path = current_path + "/face_database/Penny/"
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
-        crop_img = frame[top:bottom, left:right]
-        if(name == "Sheldon Cooper"):
-            cv2.imwrite(current_path + "/face_database/Sheldon/" + "sheldon"+str(counter)+".png",crop_img)
-            counter = counter + 1
-        elif(name == "Penny"):
-            cv2.imwrite(current_path + "/face_database/Penny/" + "penny"+str(counter1)+".png",crop_img)
-            counter1 = counter1 + 1
-
         # Draw a label with a name below the face
         cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+
+        if (targeted_fer_image != "NAN"):
+            fer = standalone_DetectEmotion.fer(targeted_fer_image)
+
         font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+        cv2.putText(frame, name + ", " + fer, (left + 6, bottom - 6), font, 0.7, (0, 255, 255), 1)
+        
+        os.rename(targeted_fer_image, dataset_path + label + "_" + fer + ".png")
 
     # Write the resulting image to the output video file
     output_movie.write(frame)
     print("Writing frame {} / {}".format(frame_number, length))
     
-    cv2.imshow('face_recog_crop', frame)
+    #cv2.imshow('face_recog_crop', frame)
     # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
@@ -102,4 +119,3 @@ while True:
 input_movie.release()
 cv2.destroyAllWindows()
 create_csv.CreateCsv(current_path + "/face_database/")
-
