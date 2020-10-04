@@ -1,6 +1,6 @@
 # Recognize, Crop and Save Faces as Images From Video
 
-For technical details check the related [medium post](https://medium.com/@ahmetozlu93/creating-multi-view-face-recognition-detection-database-for-deep-learning-in-programmatic-way-14bbdd4b00a9)!
+For technical details check the related [medium post](https://medium.com/@ahmetozlu93/creating-multi-view-face-recognition-detection-database-for-deep-learning-in-programmatic-way-14bbdd4b00a9)! ***Please contact if you need professional face detection & recognition project with the super high accuracy.***
 
 ## QUICK DEMO
 
