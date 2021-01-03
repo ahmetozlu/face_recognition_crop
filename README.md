@@ -19,7 +19,7 @@ For technical details check the related [medium post](https://medium.com/@ahmeto
 ## THEORY
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/22610163/103477099-43bc1980-4dcc-11eb-95ae-510fd33e90c6.png" | width=360>
+  <img src="https://user-images.githubusercontent.com/22610163/103477099-43bc1980-4dcc-11eb-95ae-510fd33e90c6.png" | width=300>
 </p>
 
 If you want to investigate some aspect of facial recognition or facial detection. One thing you are going to want is a variety of faces that you can use for your system. You can create your own face detection/recognition database by this program. [face_recognizer.py](https://github.com/ahmetozlu/face_database_creator/blob/master/face_recognizer.py) recognizes the faces from video, crop and save them as an image under appropriate path hierarchy.
